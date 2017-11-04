@@ -1,4 +1,4 @@
-#include "player.h"
+#include "player.hpp"
 #include <random>
 
 const Stats initial_stats = {
@@ -13,9 +13,7 @@ const Stats initial_stats = {
     0 			// Critical
 };
 
-Player::Player(const char* name) {
-	Player::name = (char*)name;
-
+Player::Player(const char* name) : Alive(name) {
 	Player::stats.level = 1;
 	Player::stats.str_growth = 60;
 	Player::stats.vit_growth = 60;
@@ -37,10 +35,6 @@ Player::Player(const char* name) {
 	Player::stats.evasion = initial_stats.evasion + Player::stats.agility;
 	Player::stats.hit = initial_stats.hit + Player::stats.dexterity;
 	Player::stats.critical_chance = Player::stats.luck;
-}
-
-char* Player::get_name() {
-	return Player::name;
 }
 
 int Player::exp_up(int exp_gain) {
