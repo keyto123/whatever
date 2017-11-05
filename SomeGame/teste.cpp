@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdint>
 #include "player.hpp"
 
 void print_player(Player* p) {
@@ -33,7 +34,7 @@ void player_level_up(Player* player) {
 }
 
 int teste() {
-	Player player("Lucas");
-	player_level_up(&player);
+	Player lucas("Lucas");
+	player_level_up(&lucas);
 	return 1;
 }

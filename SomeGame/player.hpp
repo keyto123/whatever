@@ -1,7 +1,6 @@
 #ifndef SOMEGAME_PLAYER_H_INCLUDED
 #define SOMEGAME_PLAYER_H_INCLUDED
 
-#include "stats.hpp"
 #include "alive.hpp"
 
 const int MAX_EXP = 99999;

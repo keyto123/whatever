@@ -1,4 +1,3 @@
-// Teste
 #include "alive.hpp"
 
 Alive::Alive(const char* name) {

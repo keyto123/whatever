@@ -1,32 +1,34 @@
 #ifndef SOMEGAME_STATS_H_INCLUDED
 #define SOMEGAME_STATS_H_INCLUDED
 
+#include <cstdint>
+
 const int MAX_STATS = 40;
-const int MAX_LEVEL = 20;
+const int MAX_LEVEL = 40;
 
 typedef struct {
-	int level;
+	std::uint8_t level;
 
-	int strength;
-	int vitality;
-	int agility;
-	int dexterity;
-	int luck;
+	std::uint8_t strength;
+	std::uint8_t vitality;
+	std::uint8_t agility;
+	std::uint8_t dexterity;
+	std::uint8_t luck;
 
-	int str_growth;
-	int vit_growth;
-	int agi_growth;
-	int dex_growth;
-	int luk_growth;
+	std::uint8_t str_growth;
+	std::uint8_t vit_growth;
+	std::uint8_t agi_growth;
+	std::uint8_t dex_growth;
+	std::uint8_t luk_growth;
 
-	int max_hp;
-	int hp;
+	std::uint8_t max_hp;
+	std::uint8_t hp;
 
-	int attack;
-	int defense;
-	int evasion;
-	int hit;
-	int critical_chance;
+	std::uint8_t attack;
+	std::uint8_t defense;
+	std::uint8_t evasion;
+	std::uint8_t hit;
+	std::uint8_t critical_chance;
 } Stats;
 
 enum STATS {

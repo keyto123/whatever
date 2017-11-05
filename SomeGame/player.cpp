@@ -1,10 +1,10 @@
 #include "player.hpp"
-#include <random>
+#include "utils.hpp"
 
 Player::Player(const char* name) : Alive(name) {
 	Player::stats.level = 1;
 	Player::stats.str_growth = 100;
-	Player::stats.vit_growth = 10;
+	Player::stats.vit_growth = 70;
 	Player::stats.agi_growth = 50;
 	Player::stats.dex_growth = 70;
 	Player::stats.luk_growth = 20;
@@ -15,7 +15,7 @@ Player::Player(const char* name) : Alive(name) {
 	Player::stats.dexterity = 5;
 	Player::stats.luck = 5;
 
-	Player::stats.max_hp = initial_stats.max_hp + Player::stats.vitality;
+	Player::stats.max_hp = initial_stats.max_hp + Player::stats.vitality * 2;
 	Player::stats.hp = Player::stats.max_hp;
 
 	Player::stats.attack = initial_stats.attack + Player::stats.strength;
@@ -53,14 +53,14 @@ int Player::set_exp(int exp) {
 }
 
 int Player::level_up() {
+	if(Player::stats.level == MAX_LEVEL)
+		return 0;
 	Player::stats.level++;
 	set_exp(0);
 
-	std::random_device rd;
-	std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 99);
-	for(int i = 0; i < 5; i++) {
-		Player::stat_up(i, dis(gen));
+	for(int i = 0, rnd; i < 5; i++) {
+		rnd = get_random_value();
+		Player::stat_up(i, rnd);
 	}
 	return 1;
 }
@@ -68,25 +68,38 @@ int Player::level_up() {
 int Player::stat_up(int stat, int rnd) {
 	switch(stat) {
 	case STR:
-		Player::stats.strength += !(rnd > Player::stats.str_growth);
-		Player::stats.attack = initial_stats.attack + Player::stats.strength;
+		if(Player::stats.strength == MAX_STATS || !(rnd < Player::stats.str_growth))
+			break;
+		Player::stats.strength++;
+		Player::stats.attack++;
 		break;
 	case VIT:
-		Player::stats.vitality += !(rnd > Player::stats.vit_growth);
-		Player::stats.max_hp = initial_stats.max_hp + Player::stats.vitality * 2;
-		Player::stats.defense = initial_stats.defense + Player::stats.vitality / 2;
+		if(Player::stats.vitality == MAX_STATS || !(rnd < Player::stats.vit_growth))
+			break;
+		Player::stats.vitality++;
+		Player::stats.max_hp += 2;
+		Player::stats.hp += 2;
+		if(Player::stats.vitality % 2 == 0) {
+			Player::stats.defense++;
+		}
 		break;
 	case AGI:
-		Player::stats.agility += !(rnd > Player::stats.agi_growth);
-		Player::stats.evasion = initial_stats.evasion + Player::stats.agility;
+		if(Player::stats.agility == MAX_STATS || !(rnd < Player::stats.agi_growth))
+			break;
+		Player::stats.agility++;
+		Player::stats.evasion++;
 		break;
 	case DEX:
-		Player::stats.dexterity += !(rnd > Player::stats.dex_growth);
-		Player::stats.hit = initial_stats.hit + Player::stats.dexterity;
+		if(Player::stats.dexterity == MAX_STATS || !(rnd < Player::stats.dex_growth))
+			break;
+		Player::stats.dexterity++;
+		Player::stats.hit++;
 		break;
 	case LUK:
-		Player::stats.luck += !(rnd > Player::stats.luk_growth);
-		Player::stats.critical_chance = Player::stats.luck;
+		if(Player::stats.luck == MAX_STATS || !(rnd < Player::stats.luk_growth))
+			break;
+		Player::stats.luck++;
+		Player::stats.critical_chance++;
 		break;
 	}
 	return 1;

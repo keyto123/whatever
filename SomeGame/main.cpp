@@ -1,13 +1,13 @@
 #include <iostream>
-#include "player.h"
+#include "player.hpp"
 
 #define TESTING
 
 #ifdef TESTING
-	#include "teste.h"
+	#include "teste.hpp"
 #endif
 
 int main() {
-	teste();
-	return 0;
+    teste();
+    return 0;
 }
