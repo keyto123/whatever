@@ -6,10 +6,6 @@
 
 const int MAX_EXP = 99999;
 
-enum STATS {
-	STR, VIT, AGI, DEX, LUK
-};
-
 class Player: public Alive {
 public:
 	Player(const char* name);
@@ -17,7 +13,6 @@ public:
 	int set_exp(int exp);
 	int level_up();
 	int stat_up(int stat, int rnd);
-	int get_stats(int stat);
 private:
 	int total_exp;
 	int level_exp;
