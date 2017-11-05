@@ -1,25 +1,13 @@
 #include "player.hpp"
 #include <random>
 
-const Stats initial_stats = {
-	1, 			// Level
-	1,1,1,1,1, 	// Stats
-	1,1,1,1,1, 	// Stats growth
-	20,20, 		// Max hp, current hp
-    5, 			// Atk
-    5, 			// Defense
-    5, 			// Evasion
-    5, 			// Hit
-    0 			// Critical
-};
-
 Player::Player(const char* name) : Alive(name) {
 	Player::stats.level = 1;
-	Player::stats.str_growth = 60;
-	Player::stats.vit_growth = 60;
-	Player::stats.agi_growth = 60;
-	Player::stats.dex_growth = 60;
-	Player::stats.luk_growth = 60;
+	Player::stats.str_growth = 100;
+	Player::stats.vit_growth = 10;
+	Player::stats.agi_growth = 50;
+	Player::stats.dex_growth = 70;
+	Player::stats.luk_growth = 20;
 
 	Player::stats.strength = 5;
 	Player::stats.vitality = 5;
@@ -71,7 +59,7 @@ int Player::level_up() {
 	std::random_device rd;
 	std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 99);
-	for(int i = 0; i < 2; i++) {
+	for(int i = 0; i < 5; i++) {
 		Player::stat_up(i, dis(gen));
 	}
 	return 1;
@@ -91,9 +79,11 @@ int Player::stat_up(int stat, int rnd) {
 	case AGI:
 		Player::stats.agility += !(rnd > Player::stats.agi_growth);
 		Player::stats.evasion = initial_stats.evasion + Player::stats.agility;
+		break;
 	case DEX:
 		Player::stats.dexterity += !(rnd > Player::stats.dex_growth);
 		Player::stats.hit = initial_stats.hit + Player::stats.dexterity;
+		break;
 	case LUK:
 		Player::stats.luck += !(rnd > Player::stats.luk_growth);
 		Player::stats.critical_chance = Player::stats.luck;

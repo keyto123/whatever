@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "player.h"
-
+#include "player.hpp"
 
 void print_player(Player* p) {
+	printf("Name: %s\n", p->get_name());
 	printf("Level: %d\n", p->stats.level);
 
 	printf("Stats: %d, %d, %d, %d, %d\n", p->stats.strength,
@@ -22,17 +22,18 @@ void print_player(Player* p) {
 
 }
 
+void player_level_up(Player* player) {
+    print_player(player);
+    while(getchar() != 'n') {
+		system("clear");
+		player->level_up();
+		print_player(player);
+		getchar();
+    }
+}
+
 int teste() {
 	Player player("Lucas");
-	char user_option;
-	while(1) {
-        system("clear");
-		print_player(&player);
-		scanf("%c", &user_option);
-		switch(user_option) {
-		default:
-			exit(0);
-		}
-	}
+	player_level_up(&player);
 	return 1;
 }
