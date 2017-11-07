@@ -8,6 +8,7 @@ const int MAX_EXP = 99999;
 class Player: public Alive {
 public:
 	Player(const char* name);
+	Player(const char* name, Stats stats);
 	int exp_up(int exp_gain);
 	int set_exp(int exp);
 	int level_up();

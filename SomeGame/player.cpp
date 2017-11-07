@@ -1,29 +1,9 @@
 #include "player.hpp"
 #include "utils.hpp"
 
-Player::Player(const char* name) : Alive(name) {
-	Player::stats.level = 1;
-	Player::stats.str_growth = 100;
-	Player::stats.vit_growth = 70;
-	Player::stats.agi_growth = 50;
-	Player::stats.dex_growth = 70;
-	Player::stats.luk_growth = 20;
+Player::Player(const char* name) : Alive(name) {}
 
-	Player::stats.strength = 5;
-	Player::stats.vitality = 5;
-	Player::stats.agility = 5;
-	Player::stats.dexterity = 5;
-	Player::stats.luck = 5;
-
-	Player::stats.max_hp = initial_stats.max_hp + Player::stats.vitality * 2;
-	Player::stats.hp = Player::stats.max_hp;
-
-	Player::stats.attack = initial_stats.attack + Player::stats.strength;
-	Player::stats.defense = initial_stats.defense + Player::stats.vitality / 2;
-	Player::stats.evasion = initial_stats.evasion + Player::stats.agility;
-	Player::stats.hit = initial_stats.hit + Player::stats.dexterity;
-	Player::stats.critical_chance = Player::stats.luck;
-}
+Player::Player(const char* name, Stats stats) : Alive(name, stats) {}
 
 int Player::exp_up(int exp_gain) {
 	if(Player::total_exp == MAX_EXP) {
@@ -58,7 +38,7 @@ int Player::level_up() {
 	Player::stats.level++;
 	set_exp(0);
 
-	for(int i = 0, rnd; i < 5; i++) {
+	for(int i = 0, rnd; i < 6; i++) {
 		rnd = get_random_value();
 		Player::stat_up(i, rnd);
 	}
@@ -67,40 +47,48 @@ int Player::level_up() {
 
 int Player::stat_up(int stat, int rnd) {
 	switch(stat) {
-	case STR:
-		if(Player::stats.strength == MAX_STATS || !(rnd < Player::stats.str_growth))
+	case HP:
+		if(stats.max_hp == MAX_HP || !(rnd < stats.hp_growth))
 			break;
-		Player::stats.strength++;
-		Player::stats.attack++;
+
+		stats.max_hp++;
+		stats.hp++;
 		break;
-	case VIT:
-		if(Player::stats.vitality == MAX_STATS || !(rnd < Player::stats.vit_growth))
+	case ATK:
+		if(stats.attack == MAX_STATS || !(rnd < stats.atk_growth))
 			break;
-		Player::stats.vitality++;
-		Player::stats.max_hp += 2;
-		Player::stats.hp += 2;
-		if(Player::stats.vitality % 2 == 0) {
-			Player::stats.defense++;
-		}
+
+		stats.attack++;
 		break;
-	case AGI:
-		if(Player::stats.agility == MAX_STATS || !(rnd < Player::stats.agi_growth))
+
+	case DEF:
+		if(stats.defense == MAX_STATS || !(rnd < stats.def_growth))
 			break;
-		Player::stats.agility++;
-		Player::stats.evasion++;
+
+		stats.defense++;
 		break;
-	case DEX:
-		if(Player::stats.dexterity == MAX_STATS || !(rnd < Player::stats.dex_growth))
+
+	case EVD:
+		if(stats.evade == MAX_STATS || !(rnd < stats.evd_growth))
 			break;
-		Player::stats.dexterity++;
-		Player::stats.hit++;
+
+		stats.evade++;
 		break;
-	case LUK:
-		if(Player::stats.luck == MAX_STATS || !(rnd < Player::stats.luk_growth))
+
+	case HIT:
+		if(stats.hit == MAX_STATS || !(rnd < stats.hit_growth))
 			break;
-		Player::stats.luck++;
-		Player::stats.critical_chance++;
+
+		stats.hit++;
+		break;
+
+	case CRIT:
+		if(stats.critical == MAX_STATS || !(rnd < stats.crit_growth))
+			break;
+
+		stats.critical++;
 		break;
 	}
 	return 1;
 }
+

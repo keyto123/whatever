@@ -6,7 +6,10 @@
 class Alive {
 public:
 	Alive(const char* name);
+	Alive(const char* name, Stats stats);
+	void set_default_stats();
 	char* get_name();
+	Stats get_stats();
 	Stats stats;
 protected:
 	char* name;
