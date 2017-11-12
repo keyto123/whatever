@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <cstdint>
 
-#include "player.hpp"
+#include "player.h"
 
 #ifdef _WIN32
 	#define CLEAR_SCREEN system("cls");

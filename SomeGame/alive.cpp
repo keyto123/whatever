@@ -1,4 +1,4 @@
-#include "alive.hpp"
+#include "alive.h"
 
 Alive::Alive(const char* name) {
 	Alive::name = (char*)name;

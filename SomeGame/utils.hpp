@@ -1,6 +1,0 @@
-#ifndef MYGAME_UTILS_HPP_INCLUDED
-#define MYGAME_UTILS_HPP_INCLUDED
-
-int get_random_value();
-
-#endif // MYGAME_UTILS_HPP_INCLUDED

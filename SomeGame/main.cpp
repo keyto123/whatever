@@ -1,10 +1,10 @@
 #include <iostream>
-#include "player.hpp"
+#include "player.h"
 
 #define TESTING
 
 #ifdef TESTING
-	#include "teste.hpp"
+	#include "teste.h"
 #endif
 
 int main() {

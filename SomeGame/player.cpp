@@ -1,5 +1,5 @@
-#include "player.hpp"
-#include "utils.hpp"
+#include "player.h"
+#include "utils.h"
 
 Player::Player(const char* name) : Alive(name) {}
 
