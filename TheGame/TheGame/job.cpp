@@ -1,5 +1,5 @@
 #include "job.h"
 
-int change_job() {
-
+int Job::change_job(int job) {
+	
 }

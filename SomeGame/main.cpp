@@ -8,6 +8,8 @@
 #endif
 
 int main() {
+#ifdef TESTING
     teste();
+#endif
     return 0;
 }

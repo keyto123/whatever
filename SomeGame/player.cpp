@@ -45,49 +45,20 @@ int Player::level_up() {
 	return 1;
 }
 
-int Player::stat_up(int stat, int rnd) {
-	switch(stat) {
-	case HP:
-		if(stats.max_hp == MAX_HP || !(rnd < stats.hp_growth))
-			break;
-
-		stats.max_hp++;
-		stats.hp++;
-		break;
-	case ATK:
-		if(stats.attack == MAX_STATS || !(rnd < stats.atk_growth))
-			break;
-
-		stats.attack++;
-		break;
-
-	case DEF:
-		if(stats.defense == MAX_STATS || !(rnd < stats.def_growth))
-			break;
-
-		stats.defense++;
-		break;
-
-	case EVD:
-		if(stats.evade == MAX_STATS || !(rnd < stats.evd_growth))
-			break;
-
-		stats.evade++;
-		break;
-
-	case HIT:
-		if(stats.hit == MAX_STATS || !(rnd < stats.hit_growth))
-			break;
-
-		stats.hit++;
-		break;
-
-	case CRIT:
-		if(stats.critical == MAX_STATS || !(rnd < stats.crit_growth))
-			break;
-
-		stats.critical++;
-		break;
+int Player::stat_up(int stat, int rnd, int amount = 1) {
+	if (stat == HP) {
+		if (stats.max_hp != MAX_HP && rnd < stats.hp_growth) {
+			stats.max_hp = stats.max_hp + amount > MAX_HP ? MAX_HP : stats.max_hp + amount;
+			stats.hp += stats.max_hp;
+		}
+		return 1;
+	}
+	uint8_t* update_stat = &(stats.max_hp) + stat;
+	uint8_t* growth_stat = &(stats.hp_growth) + stat;
+	
+	if (*update_stat != MAX_STATS && rnd < *growth_stat) {
+		++*update_stat;
+		return 1;
 	}
 	return 1;
 }
