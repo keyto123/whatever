@@ -1,0 +1,8 @@
+#ifndef SOMEGAME_JOB_H_INCLUDED
+#define SOMEGAME_JOB_H_INCLUDED
+
+class Job {
+
+};
+
+#endif // SOMEGAME_JOB_H_INCLUDED
