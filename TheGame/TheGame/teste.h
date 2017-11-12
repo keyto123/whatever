@@ -1,6 +1,0 @@
-#ifndef SOMEGAME_TESTE_H_INCLUDED
-#define SOMEGAME_TESTE_H_INCLUDED
-
-int teste();
-
-#endif // SOMEGAME_TESTE_H_INCLUDED
