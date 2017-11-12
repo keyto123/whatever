@@ -76,6 +76,5 @@ void average_stats() {
 
 int teste() {
 	average_stats();
-	printf("GitHub Testing\n");
 	return 1;
 }
