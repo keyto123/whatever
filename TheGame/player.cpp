@@ -1,46 +1,60 @@
 #include "player.h"
 #include "utils.h"
 
-Player::Player(const char* name) : Alive(name) {}
-
-Player::Player(const char* name, Stats stats) : Alive(name, stats) {}
+Player::Player(const char* name, Stats stats, int job = 0) : Job(job), Alive(name, stats) {
+	Player::job = job;
+}
 
 int Player::exp_up(int exp_gain) {
-	if(Player::total_exp == MAX_EXP) {
+	if(total_exp == MAX_EXP) {
 		return 0;
 	}
 
-	Player::total_exp += exp_gain;
+	total_exp += exp_gain;
 
-	if(Player::stats.level == MAX_LEVEL) {
+	if(stats.level == MAX_LEVEL) {
 		return 0;
 	}
 
-	if(Player::level_exp < 100) {
-		if(Player::level_exp + exp_gain >= 100) {
-			Player::level_exp = 100;
-			Player::level_up();
+	if(stats.experience < 100) {
+		if(stats.experience + exp_gain >= 100) {
+			stats.experience = 100;
+			level_up();
 		} else {
-			Player::level_exp += exp_gain;
+			stats.experience += exp_gain;
 		}
 	}
 	return 1;
 }
 
 int Player::set_exp(int exp) {
-	Player::level_exp = exp;
+	stats.experience = exp;
 	return 1;
 }
 
+int Player::add_job_bonus(int job) {
+	uint8_t* current_stat = &(stats.max_hp);
+	for (int i = 0; i < 6; i++) {
+		utils.get_file_line(JOB_STATS_PATH, i);
+
+	}
+}
+
+int Player::change_job(int job) {
+	Player::job.change_job(job);
+	stats.level = 1;
+	add_job_bonus(job);
+}
+
 int Player::level_up() {
-	if(Player::stats.level == MAX_LEVEL)
+	if(stats.level == MAX_LEVEL)
 		return 0;
-	Player::stats.level++;
+	stats.level++;
 	set_exp(0);
 
 	for(int i = 0, rnd; i < 6; i++) {
-		rnd = get_random_value();
-		Player::stat_up(i, rnd);
+		rnd = utils.get_random_value();
+		stat_up(i, rnd);
 	}
 	return 1;
 }
@@ -62,4 +76,3 @@ int Player::stat_up(int stat, int rnd, int amount = 1) {
 	}
 	return 1;
 }
-

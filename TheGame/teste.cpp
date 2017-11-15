@@ -6,9 +6,9 @@
 
 #ifdef _WIN32
 	#define CLEAR_SCREEN system("cls");
-#else
+#elif __linux__
 	#define CLEAR_SCREEN(); system("clear");
-#endif // linux
+#endif
 
 void print_player(Player* p) {
 	std::uint8_t* p_st = &p->stats.level;

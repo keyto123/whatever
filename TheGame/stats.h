@@ -26,6 +26,8 @@ typedef struct {
 	std::uint8_t hit_growth;
 	std::uint8_t crit_growth;
 
+	std::uint8_t experience;
+
 } Stats;
 
 enum STATS {
