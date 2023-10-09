@@ -1,0 +1,15 @@
+// Max_hp,attack,defense,evade,hit,critical
+// Novice
+0,0,0,0,0,0
+// Knight
+5,4,3,1,1,1
+// Samurai
+1,2,0,3,2,7
+// Ninja
+0,5,0,5,3,2
+// White Mage
+4,2,3,4,2,0
+// Black Mage
+0,6,0,1,4,4
+// Defender
+7,1,5,1,1,0

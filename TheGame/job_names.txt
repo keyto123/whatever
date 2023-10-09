@@ -1,7 +1,0 @@
-Novice
-Knight
-Samurai
-Ninja
-White Mage
-Black Mage
-Defender
